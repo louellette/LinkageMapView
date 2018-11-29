@@ -1414,7 +1414,7 @@ lmv.linkage.plot <- function(mapthis,
     
     if (inverse.dens) {
       dens_label <- sprintf("Density (Loci/%s)", units)
-      dens_labs <- 1/bplotdens
+      dens_labs <- round(1/bplotdens, 1)
     } else {
       dens_label <- sprintf("Density (%s/Loci)", units)
       dens_labs <- bplotdens 
