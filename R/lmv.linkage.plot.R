@@ -46,6 +46,12 @@
 #' @param col.main The color to be used for the main title.
 #'        Defaults to par("col.main").
 #'
+#' @param cex.dens The magnification to be used for density map axis text.
+#'        Defaults to 0.75*(par("cex.axis")).
+#'
+#' @param inverse.dens Optionally inverse the density map labels (Loci/cM).
+#'        Defaults to TRUE.
+#'
 #' @param conndf An optional data frame containing markers to be connected
 #'        with lines (homologs).  If autoconnadj = TRUE, these lines will
 #'        appear as well as those with the same name in adjacent linkage
@@ -424,6 +430,8 @@ lmv.linkage.plot <- function(mapthis,
                 col.axis = par("col.axis"),
                 col.lgtitle = par("col.main"),
                 col.main = par("col.main"),
+                cex.dens=0.75*(par("cex.axis")),
+                inverse.dens=TRUE,
                 conndf = NULL,
                 denmap = FALSE,
                 dupnbr = FALSE,
@@ -1403,17 +1411,25 @@ lmv.linkage.plot <- function(mapthis,
       bplotdens <- append(bplotdens, uleg$dens[length(uleg$dens)])
       bplotcol <- append(bplotcol, uleg$col[length(uleg$col)])
     }
+    
+    if (inverse.dens) {
+      dens_label <- sprintf("Density (Loci/%s)", units)
+      dens_labs <- round(1/bplotdens, 1)
+    } else {
+      dens_label <- sprintf("Density (%s/Loci)", units)
+      dens_labs <- bplotdens 
+    }
     par(mar = c(5, leftmar, 1, 1))
     barplot(
       rep(1, length(bplotcol)),
       col = bplotcol,
       space = 0,
       axes = F,
-      xlab = paste("Density (", units, "/Locus)", sep = ""),
-      names = bplotdens,
-      cex.names = .75,
+      xlab = dens_label,
+      names = dens_labs,
+      cex.names = cex.dens,
       las = 2,
-      cex.lab = .75
+      cex.lab = cex.dens
     )
 
   }
