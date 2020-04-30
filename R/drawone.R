@@ -515,7 +515,9 @@ drawone <-
           )
           # make inner region 1/3 size of linkage group width
           # 1/3 is arbitrary, just looks good
-          add.hatch <- ifelse(all(is.logical(qtldf$border)), TRUE, FALSE)
+          hatch <- 0
+          if(!is.null(qtldf$hatch))
+            hatch <- ifelse(qtldf$hatch, 30, 0) # if hatch is TRUE, set density to 30
           if(is.null(qtldf$border)) 
             qtldf$border <- qtldf$col
           rect(
@@ -524,7 +526,7 @@ drawone <-
             x2[1] + posmult * (qtlxpos + strwidth("M") + lgwpct / 3),
             qtldf$ei[ql],
             col = qtldf$col[ql],
-            density = ifelse(add.hatch,1,0), # add hatch if border is logical
+            density =hatch,
             border = qtldf$border[ql]
           )
           text(
