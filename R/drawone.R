@@ -526,7 +526,7 @@ drawone <-
             x2[1] + posmult * (qtlxpos + strwidth("M") + lgwpct / 3),
             qtldf$ei[ql],
             col = qtldf$col[ql],
-            density =hatch,
+            density = hatch[ql],
             border = qtldf$border[ql]
           )
           text(
