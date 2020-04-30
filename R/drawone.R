@@ -456,6 +456,13 @@ drawone <-
       # determine x position of qtl
 
       if (nrow(qtldf) > 0) {
+        hatch <- 0
+        if(!is.null(qtldf$hatch))
+          hatch <- ifelse(qtldf$hatch, 30, 0) # if hatch is TRUE, set density to 30
+        write(hatch, stderr())
+        if(is.null(qtldf$border)) 
+          qtldf$border <- NA
+        write(qtldf$border, stderr())
         for (ql in 1:nrow(qtldf)) {
           # if there are labels on y axis where qtl needs to be drawn
           # first decide if QTL line (so to eo) or text label is longest
@@ -515,11 +522,6 @@ drawone <-
           )
           # make inner region 1/3 size of linkage group width
           # 1/3 is arbitrary, just looks good
-          hatch <- 0
-          if(!is.null(qtldf$hatch))
-            hatch <- ifelse(qtldf$hatch, 30, 0) # if hatch is TRUE, set density to 30
-          if(is.null(qtldf$border)) 
-            qtldf$border <- qtldf$col
           rect(
             x2[1] + posmult * (qtlxpos + strwidth("M")),
             qtldf$si[ql],
