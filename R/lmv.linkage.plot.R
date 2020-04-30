@@ -186,6 +186,8 @@
 #'          \item ei End of inner interval. Numeric.
 #'          \item eo End of outer interval. Numeric.
 #'          \item col Color for QTL.
+#'          \item border Color of QTL rectangle border (optionnal)
+#'          \item hatch Hatch or not QTL rectangle (optionnal). Logical.
 #'        }
 #'
 #' @param qtlscanone Optional scanone data frame from package r/qtl.  If provided,
