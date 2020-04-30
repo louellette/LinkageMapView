@@ -458,11 +458,9 @@ drawone <-
       if (nrow(qtldf) > 0) {
         hatch <- 0
         if(!is.null(qtldf$hatch))
-          hatch <- ifelse(qtldf$hatch, 30, 0) # if hatch is TRUE, set density to 30
-        write(hatch, stderr())
+          hatch <- ifelse(qtldf$hatch, 30, NA) # if hatch is TRUE, set density to 30
         if(is.null(qtldf$border)) 
           qtldf$border <- NA
-        write(qtldf$border, stderr())
         for (ql in 1:nrow(qtldf)) {
           # if there are labels on y axis where qtl needs to be drawn
           # first decide if QTL line (so to eo) or text label is longest
